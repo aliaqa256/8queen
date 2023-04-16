@@ -1,22 +1,25 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
+var res [][]int
 
-
-var count = 8
-
+var count = 4
 func main() {
 	cols := []int {}
+	res =[][]int{}
 	
 
 	SetQueen(0,cols)
+
+	fmt.Println(res)
+	fmt.Println(len(res))
+
+	CreateTableFrom(res)
 }
 
 func SetQueen(row int,cols []int) {
 	if count == len(cols) {
-		fmt.Println(cols)
+		res = append(res, cols)
 		return
 	}
 
@@ -43,4 +46,44 @@ func isValid(cols []int, row, col int) bool {
 	}
 
 	return true
+}
+
+
+func CreateTableFrom(res [][]int){
+	table := [][]int {
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+
+	}
+	for _,resualt := range res {
+
+		for col ,row := range resualt {
+			table[col][row] = 1
+		}
+	
+
+
+		for _,row := range table {
+			fmt.Println(row)
+		}
+
+		fmt.Println("------------------------")
+		table = [][]int {
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+		{0,0,0,0,0,0,0,0},
+
+	}
+	}
 }
