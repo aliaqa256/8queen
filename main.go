@@ -2,12 +2,32 @@ package main
 
 import "fmt"
 
-var board [8][8]int 
-var count = 8
+const (
+	SIZE = 8
+)
 
-var res [][8][8]int 
+var board [SIZE][SIZE]int 
+var count = SIZE
+
+var res [][SIZE][SIZE]int 
 
 func main() {
+	board = [SIZE][SIZE]int{
+
+	}
+
+	for i:=0;i<SIZE;i++{
+		for j:=0;j<SIZE;j++{
+			board[i][j]=0
+		}
+
+	}
+
+	
+
+
+	res = make([][SIZE][SIZE]int,0)
+
 	PlaceQueen(0)
 	
 	for i:=0;i<len(res);i++{
@@ -50,7 +70,7 @@ func IsValid(row,col int ) bool{
 			return false
 		}
 	}
-	for i,j:=row-1,col+1;i>=0&&j<8;i,j=i-1,j+1{
+	for i,j:=row-1,col+1;i>=0&&j<count;i,j=i-1,j+1{
 		if board[i][j]==1{
 			return false
 		}
@@ -60,7 +80,7 @@ func IsValid(row,col int ) bool{
 
 }
 
-func PrintBoard( board [8][8]int){
+func PrintBoard( board [SIZE][SIZE]int){
 	for i:=0;i<count;i++{
 		for j:=0;j<count;j++{
 			fmt.Print(board[i][j]," ")
