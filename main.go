@@ -1,89 +1,71 @@
 package main
 
 import "fmt"
-var res [][]int
 
-var count = 4
+var board [8][8]int 
+var count = 8
+
+var res [][8][8]int 
+
 func main() {
-	cols := []int {}
-	res =[][]int{}
+	PlaceQueen(0)
 	
+	for i:=0;i<len(res);i++{
+		PrintBoard(res[i])
+	}
 
-	SetQueen(0,cols)
-
-	fmt.Println(res)
+	fmt.Print("len is ")
 	fmt.Println(len(res))
 
-	CreateTableFrom(res)
+
+
 }
 
-func SetQueen(row int,cols []int) {
-	if count == len(cols) {
-		res = append(res, cols)
+func PlaceQueen(row int){
+	if row == count{
+		res = append(res,board)
 		return
 	}
-
-	for col := 0; col < count; col++ {
-		if isValid(cols, row, col) {
-			SetQueen(row+1,append(cols, col))
+	for col:=0;col<count;col++{
+		if IsValid(row,col){
+			board[row][col]=1
+			PlaceQueen(row+1)
+			board[row][col]=0
 		}
-	}
-}
-
-func isValid(cols []int, row, col int) bool {
-	for r, c := range cols {
-		if c == col {
-			return false
-		}
-
-		if r-c == row-col {
-			return false
-		}
-
-		if r+c == row+col {
-			return false
-		}
-	}
-
-	return true
-}
+	} 
 
 
-func CreateTableFrom(res [][]int){
-	table := [][]int {
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-
-	}
-	for _,resualt := range res {
-
-		for col ,row := range resualt {
-			table[col][row] = 1
-		}
 	
+}
 
 
-		for _,row := range table {
-			fmt.Println(row)
+func IsValid(row,col int ) bool{
+	for i:=0;i<row;i++{
+		if board[i][col]==1{
+			return false
 		}
-
-		fmt.Println("------------------------")
-		table = [][]int {
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-		{0,0,0,0,0,0,0,0},
-
 	}
+	for i,j:=row-1,col-1;i>=0&&j>=0;i,j=i-1,j-1{
+		if board[i][j]==1{
+			return false
+		}
 	}
+	for i,j:=row-1,col+1;i>=0&&j<8;i,j=i-1,j+1{
+		if board[i][j]==1{
+			return false
+		}
+	}
+	return true
+
+
+}
+
+func PrintBoard( board [8][8]int){
+	for i:=0;i<count;i++{
+		for j:=0;j<count;j++{
+			fmt.Print(board[i][j]," ")
+		}
+		fmt.Println()
+	}
+	fmt.Println()
 }
