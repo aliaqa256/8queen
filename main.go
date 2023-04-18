@@ -16,12 +16,7 @@ var (
 func main() {
 	PlaceQueen(0)
 
-	for i := 0; i < len(res); i++ {
-		PrintBoard(res[i])
-	}
 
-	fmt.Print("len is ")
-	fmt.Println(len(res))
 }
 
 func PlaceQueen(row int) {
